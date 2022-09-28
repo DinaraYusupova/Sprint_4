@@ -15,8 +15,10 @@ public class HomePageScooter {
     private final By BUTTON_MAKE_ORDER_IN_HEAD = By.xpath(".//div[@class='Header_Nav__AGCXC']/button[text()='Заказать']");
     //Локатор для кнопки "Заказать" внизу страницы
     private final By BUTTON_MAKE_ORDER_IN_THE_END = By.xpath(".//div[@class='Home_FinishButton__1_cWm']/button[text()='Заказать']");
-
-
+    //Локатор для логотипа "Самокат" в шапке
+    private final By SCOOTER = By.xpath(".//img[@alt = 'Scooter']");
+    //Локатор для логотипа "Яндекс" в шапке
+    private final By YANDEX = By.xpath(".//img[@alt = 'Yandex']");
     //Локатор для вопроса: Сколько это стоит? (Раздел: Вопросы о важном)
     private final By QUESTION_PRICE = By.id("accordion__heading-0");
     //Локатор для ответа: Сколько это стоит? (Раздел: Вопросы о важном)
@@ -84,6 +86,15 @@ public class HomePageScooter {
     //Нажать на кнопку "Заказать" внизу страницы
     public void clickButtonOrderInTheEnd() {
         DRIVER.findElement(BUTTON_MAKE_ORDER_IN_THE_END).click();
+    }
+
+    //Нажать на логотип "Самокат" в шапке страницы
+    public void clickLogoScooter() {
+        DRIVER.findElement(SCOOTER).click();
+    }
+    //Нажать на логотип "Яндекс" в шапке страницы
+    public void clickLogoYandex() {
+        DRIVER.findElement(YANDEX).click();
     }
 
     //Нажать на вопрос: Сколько это стоит?

@@ -26,7 +26,6 @@ public class TestsForQuestions {
     public void questionAboutPrice() {
         // создаем объект класса главной страницы приложения
         HomePageScooter homePage =new HomePageScooter(driver);
-
         //кликаем на вопрос
         homePage.clickQuestionPrice();
         //проверяем правильность ответа
