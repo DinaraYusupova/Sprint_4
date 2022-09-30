@@ -1,13 +1,8 @@
-package testsRorChrome;
+package tests;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageDescription.HomePageScooter;
 import pageDescription.orderPage.ConfirmationOder;
 import pageDescription.orderPage.OrderScooterAboutRent;
@@ -15,26 +10,25 @@ import pageDescription.orderPage.OrderScooterForWhomTheScooter;
 import pageDescription.orderPage.SuccessfullyOrderMessage;
 
 @RunWith(Parameterized.class)
-public class MakeAnOrder {
-    private WebDriver driver;
-    private final String NAME;
-    private final String SURNAME;
-    private final String ADDRESS;
-    private final String TELEPHONE;
-    private final String DELIVERY_DATE;
-    private final int RENTAL_DAYS;
-    private final String COLOUR_OF_SCOOTER;
-    private final String COMMENT_FOR_COURIER;
+public class MakeAnOrder extends BaseTest{
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String telephone;
+    private final String deliveryDate;
+    private final int rentalDays;
+    private final String colourOfScooter;
+    private final String commentForCourier;
 
     public MakeAnOrder(String name, String surname, String address, String telephone, String deliveryDate, int rentalDays, String colourOfScooter, String commentForCourier) {
-        this.NAME = name;
-        this.SURNAME = surname;
-        this.ADDRESS = address;
-        this.TELEPHONE = telephone;
-        this.DELIVERY_DATE = deliveryDate;
-        this.RENTAL_DAYS = rentalDays;
-        this.COLOUR_OF_SCOOTER = colourOfScooter;
-        this.COMMENT_FOR_COURIER = commentForCourier;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.telephone = telephone;
+        this.deliveryDate = deliveryDate;
+        this.rentalDays = rentalDays;
+        this.colourOfScooter = colourOfScooter;
+        this.commentForCourier = commentForCourier;
     }
 
     @Parameterized.Parameters
@@ -46,24 +40,15 @@ public class MakeAnOrder {
         };
     }
 
-    @Before
-    public void openHomePageInChrome() {
-        // драйвер для браузера Chrome
-        driver = new ChromeDriver();
-        // переход на страницу тестового приложения
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-        //закрываем сообщение про cookies
-        driver.findElement(By.cssSelector(".App_CookieButton__3cvqF")).click();
-    }
 
     @Test //Оформляем заказ через кнопку "Заказать" в шапке страницы
     public void makeOrderWithButtonInHead() {
         HomePageScooter homePage = new HomePageScooter(driver);
         homePage.clickButtonOrderInHead();
         OrderScooterForWhomTheScooter firstOrderPage = new OrderScooterForWhomTheScooter(driver);
-        firstOrderPage.setOrderFields(NAME, SURNAME, ADDRESS, TELEPHONE);
+        firstOrderPage.setOrderFields(name, surname, address, telephone);
         OrderScooterAboutRent secondOrderPage = new OrderScooterAboutRent(driver);
-        secondOrderPage.setOrderFields(DELIVERY_DATE, RENTAL_DAYS, COLOUR_OF_SCOOTER, COMMENT_FOR_COURIER);
+        secondOrderPage.setOrderFields(deliveryDate, rentalDays, colourOfScooter, commentForCourier);
         ConfirmationOder sayYes = new ConfirmationOder(driver);
         sayYes.clickYes();
         SuccessfullyOrderMessage successPage = new SuccessfullyOrderMessage(driver);
@@ -75,16 +60,12 @@ public class MakeAnOrder {
         HomePageScooter homePage = new HomePageScooter(driver);
         homePage.clickButtonOrderInTheEnd();
         OrderScooterForWhomTheScooter firstOrderPage = new OrderScooterForWhomTheScooter(driver);
-        firstOrderPage.setOrderFields(NAME, SURNAME, ADDRESS, TELEPHONE);
+        firstOrderPage.setOrderFields(name, surname, address, telephone);
         OrderScooterAboutRent secondOrderPage = new OrderScooterAboutRent(driver);
-        secondOrderPage.setOrderFields(DELIVERY_DATE, RENTAL_DAYS, COLOUR_OF_SCOOTER, COMMENT_FOR_COURIER);
+        secondOrderPage.setOrderFields(deliveryDate, rentalDays, colourOfScooter, commentForCourier);
         ConfirmationOder sayYes = new ConfirmationOder(driver);
         sayYes.clickYes();
         SuccessfullyOrderMessage successPage = new SuccessfullyOrderMessage(driver);
         successPage.isSuccessMessageVisible();
-    }
-    @After // закрываем браузер
-    public void closeChrome() {
-        driver.quit();
     }
 }

@@ -4,15 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ConfirmationOder {
-    private final WebDriver DRIVER;
+    private final WebDriver driver;
     //локатор для кнопки "Заказать" в шапке страницы
-    private final By BUTTON_YES = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Да']");
+    private final By buttonYes = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Да']");
 
     public ConfirmationOder(WebDriver driver) {
-        this.DRIVER = driver;
+        this.driver = driver;
     }
 
     public void clickYes(){
-        DRIVER.findElement(BUTTON_YES).click();
+        driver.findElement(buttonYes).click();
     }
 }
